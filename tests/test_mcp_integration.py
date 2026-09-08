@@ -4,6 +4,7 @@ import asyncio
 import json
 from pathlib import Path
 import sys
+import sysconfig
 import tempfile
 
 import pytest
@@ -19,7 +20,7 @@ def test_real_sdk_stdio_roundtrip(entrypoint):
             args = ["-m", "milano_mobility_mcp"]
         else:
             name = "milano-mobility-mcp.exe" if sys.platform == "win32" else "milano-mobility-mcp"
-            command = str(Path(sys.executable).parent / name)
+            command = str(Path(sysconfig.get_path("scripts")) / name)
             args = []
         calls = {
             "check_vehicle_access": dict(
